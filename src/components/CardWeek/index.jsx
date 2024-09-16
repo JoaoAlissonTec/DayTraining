@@ -5,8 +5,8 @@ export default function CardWeek({day, training, isActive }) {
 
   return (
     <View style={[styles.card, isActive && {backgroundColor: "#FF9500"}]}>
-      <Text style={[!isActive && {color: "white"}]}>{day}</Text>
-      <Text style={[styles.description, !isActive && {color: "white"}]}>{training}</Text>
+      <Text style={[styles.title, !isActive && {color: "white"}]}>{day}</Text>
+      <Text style={[styles.description, !isActive && {color: "white"}, !training && {color: "grey"}]}>{training ?? "(Sem treino)"}</Text>
     </View>
   );
 }
@@ -20,6 +20,9 @@ const styles = StyleSheet.create({
     height: 70,
     justifyContent: "space-around",
     borderRadius: 10
+  },
+  title:{
+    textTransform: "capitalize"
   },
   description: {
     fontSize: 16,

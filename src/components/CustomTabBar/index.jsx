@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, StyleSheet, Platform, } from 'react-native'
-import {FontAwesome} from '@expo/vector-icons'
+import {FontAwesome5} from '@expo/vector-icons'
 import React from 'react'
 
 export default function CustomTabBar({state, descriptors, navigation}) {
@@ -43,7 +43,7 @@ export default function CustomTabBar({state, descriptors, navigation}) {
                 >
                     <View>
                         <View>
-                            <FontAwesome name={options.tabBarIcon} size={25} color={ isFocused ? "#FF9500" : "white"}/>
+                            <FontAwesome5 name={options.tabBarIcon} size={20} color={ isFocused ? "#FF9500" : "white"}/>
                         </View>
                     </View>
                 </TouchableOpacity>

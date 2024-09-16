@@ -1,7 +1,6 @@
 import { Redirect, Tabs } from "expo-router"
 import { useSession } from "../../contexts/AuthContext"
 import { Text } from "react-native"
-import FontAwesome from '@expo/vector-icons/FontAwesome'
 import CustomTabBar from "../../components/CustomTabBar"
 
 export default function Root() {
@@ -17,8 +16,9 @@ export default function Root() {
     
   return (
     <Tabs tabBar={(props) => <CustomTabBar {...props}/>}>
+        <Tabs.Screen name="rec-workout" options={{headerShown: false, title: "Profile", tabBarIcon: "dumbbell"}}/>
         <Tabs.Screen name="index" options={{headerShown: false, title: "Home", tabBarIcon: "home"}}/>
-        <Tabs.Screen name="profile" options={{headerShown: false, title: "Profile", tabBarIcon: "user-circle-o"}}/>
+        <Tabs.Screen name="profile" options={{headerShown: false, title: "Profile", tabBarIcon: "user-circle"}}/>
     </Tabs>
   )
 }

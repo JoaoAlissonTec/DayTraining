@@ -1,8 +1,10 @@
-import { useContext, createContext } from "react";
+import { useContext, createContext, useEffect, useState } from "react";
 import React from "react";
-import { useStorageState } from "../storage/useStorageState";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../services/firebaseConfig";
+import { loginUser } from "../services/firebaseAuth";
 
-const AuthContext = createContext({signIn: ()=>null, signOut: ()=>null, session: null, isLoading: false});
+const AuthContext = createContext();
 
 export function useSession() {
   const value = useContext(AuthContext);
@@ -15,19 +17,34 @@ export function useSession() {
 }
 
 export function SessionProvider({ children }) {
-  const [[isLoading, session], setSession] = useStorageState("session");
+
+  const [user, setUser] = useState()
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(()=>{
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user)
+      setIsLoading(false)
+    })
+
+    return () => unsubscribe();
+  }, [auth])
 
   return (
     <AuthContext.Provider
       value={{
-        signIn: () => {
-          setSession("mykey");
-          return true
+        signIn: async (email, password) => {
+          const response = await loginUser(email, password)
+          if(response.status === 200){
+            return true
+          }else{
+            return false
+          }
         },
-        signOut: () => {
-          setSession(null);
+        signOut: async () => {
+          await signOut(auth)
         },
-        session,
+        session: user,
         isLoading
       }}
     >
