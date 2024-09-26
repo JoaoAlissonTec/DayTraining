@@ -61,16 +61,21 @@ export default function WorkoutId() {
 	};
 
 	function update (name, reps, series) {
-		if (!showSaveButton) {
-			setShowSaveButton(true);
-		}
 		const id = selectedItems.findIndex((fields)=> fields.name === name)
 		const aux = [...selectedItems]
-
+		
 		aux[id].reps = reps
 		aux[id].series = series
 		
+		if(aux[id] === selectedItems[id]){
+			return	
+		}
+		
 		setSelectedItems(aux)
+
+		if (!showSaveButton) {
+			setShowSaveButton(true);
+		}
 	}
 
 	const active = () => {
