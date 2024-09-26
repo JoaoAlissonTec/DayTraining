@@ -35,6 +35,7 @@ export function SessionProvider({ children }) {
       value={{
         signIn: async (email, password) => {
           const response = await loginUser(email, password)
+          console.log(response, email, password)
           if(response.status === 200){
             return true
           }else{

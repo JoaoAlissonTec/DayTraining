@@ -1,6 +1,5 @@
 import { Stack } from "expo-router";
 import { SessionProvider } from "../contexts/AuthContext";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Root() {
   return (

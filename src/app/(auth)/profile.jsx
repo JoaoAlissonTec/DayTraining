@@ -17,6 +17,7 @@ import * as ImagePicker from "expo-image-picker";
 import { uploadImage } from "../../utils/uploadImage";
 import { FontAwesome5, FontAwesome6 } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
+import CustomButtonIcon from "../../components/CustomButtonIcon";
 
 export default function Profile() {
 	const { signOut, session } = useSession();
@@ -107,17 +108,8 @@ export default function Profile() {
 					<Picker.Item style={styles.item} label="Feminino" value="F" />
 				</Picker>
 				<View style={styles.buttons}>
-					<Pressable onPress={handleSave} style={({pressed})=>[styles.button, {backgroundColor: pressed ? "#3C3C3C" : "#242424"}]}>
-						<FontAwesome6 style={styles.button_icon} name="floppy-disk" />
-						<Text style={styles.button_label}>Salvar</Text>
-					</Pressable>
-					<Pressable onPress={signOut} style={({pressed})=>[styles.button, {backgroundColor: pressed ? "#3C3C3C" : "#242424"}]}>
-						<FontAwesome6
-							style={styles.button_icon}
-							name="arrow-right-from-bracket"
-						/>
-						<Text style={styles.button_label}>Sair</Text>
-					</Pressable>
+					<CustomButtonIcon onPress={handleSave} label="Salvar" iconType={FontAwesome6} iconName="floppy-disk"/>
+					<CustomButtonIcon onPress={signOut} label="Sair" iconType={FontAwesome6} iconName="arrow-right-from-bracket"/>
 				</View>
 			</View>
 		</SafeAreaView>
@@ -174,28 +166,6 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		backgroundColor: "#FF9500",
 		borderRadius: 15,
-	},
-	button: {
-		flexDirection: "row",
-		alignItems: "center",
-		backgroundColor: "#242424",
-		elevation: 10,
-		paddingHorizontal: 15,
-		paddingVertical: 20,
-		borderRadius: 15,
-		gap: 25,
-	},
-	button_label: {
-		color: "white",
-		fontSize: 16,
-	},
-	button_icon: {
-		color: "#FF9500",
-		backgroundColor: "rgba(255, 149, 0, 0.2)",
-		paddingVertical: 5,
-		paddingHorizontal: 10,
-		fontSize: 16,
-		borderRadius: 5,
 	},
 	buttons: {
 		marginTop: 15,

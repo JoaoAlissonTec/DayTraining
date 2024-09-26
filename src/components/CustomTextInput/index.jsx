@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, TextInput } from "react-native";
 import React, { useState } from "react";
 
-export default function CustomTextInput({label, placeholder, value, onChangeText, secureTextEntry}) {
+export default function CustomTextInput({label, placeholder, value, onChangeText, secureTextEntry, refer}) {
 
 	const [isFocused, setIsFocused] = useState(false)
 
@@ -18,6 +18,7 @@ export default function CustomTextInput({label, placeholder, value, onChangeText
 				onChangeText={onChangeText}
 				onFocus={()=>setIsFocused(true)}
 				onBlur={()=>setIsFocused(false)}
+				ref={refer}
 			/>
 		</View>
 	);

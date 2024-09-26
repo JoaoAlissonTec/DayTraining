@@ -1,13 +1,24 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import React from "react";
+import { useRouter } from "expo-router";
 
 export default function CardWeek({day, training, isActive }) {
 
+  const router = useRouter()
+
+  function handleClick(){
+    if(!training){
+      return
+    }
+
+    router.push({pathname: `/home/${training}`})
+  }
+
   return (
-    <View style={[styles.card, isActive && {backgroundColor: "#FF9500"}]}>
+    <Pressable style={[styles.card, isActive && {backgroundColor: "#FF9500"}]} onPress={handleClick}>
       <Text style={[styles.title, !isActive && {color: "white"}]}>{day}</Text>
       <Text style={[styles.description, !isActive && {color: "white"}, !training && {color: "grey"}]}>{training ?? "(Sem treino)"}</Text>
-    </View>
+    </Pressable>
   );
 }
 

@@ -1,13 +1,14 @@
-import { child, get, getDatabase, onValue, ref, set, update } from "firebase/database";
+import { child, get, getDatabase, onValue, ref, remove, set, update } from "firebase/database";
 import { useEffect, useState } from "react";
 
 function writeData(url, body) {
 	const db = getDatabase();
+	console.log(body)
 	update(ref(db, url), body);
 }
 
 function getData(url) {
-	const [week, setWeek] = useState();
+	const [value, setValue] = useState();
 
 	useEffect(() => {
 		const db = getDatabase();
@@ -15,12 +16,17 @@ function getData(url) {
 
 		return onValue(resp, (snap)=> {
 			let data = snap.val() ?? {}
-			let weekItems = {...data}
-			setWeek(weekItems);
+			let valueItems = {...data}
+			setValue(valueItems);
 		})
 	}, []);
 
-	return week
+	return value
 }
 
-export { writeData, getData };
+function deleteData(url) {
+	const db = getDatabase();
+	remove(ref(db, url))
+}
+
+export { writeData, getData, deleteData };

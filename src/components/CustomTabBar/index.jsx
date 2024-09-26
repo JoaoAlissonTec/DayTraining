@@ -9,6 +9,12 @@ export default function CustomTabBar({state, descriptors, navigation}) {
         {state.routes.map((route, index)=>{
             const {options} = descriptors[route.key]
 
+            if(options["tabBarButton"]){   
+                if(options.tabBarButton() === null){
+                    return
+                }
+            }
+
             const isFocused = state.index === index;
 
             const onPress = () => {
